@@ -1,8 +1,8 @@
 <?php
 
-namespace CorderoDigital;
+namespace CorderoDigital\QueryLoader;
 
-class QueryLoader
+class Loader
 {
     protected static array $loadedFragments = [];
 
@@ -15,7 +15,7 @@ class QueryLoader
         self::$loadedFragments = []; // Reset fragments tracking
         $query = file_get_contents($filePath);
 
-        return self::processIncludes($query, dirname($filePath));
+        return trim(self::processIncludes($query, dirname($filePath)));
     }
 
     protected static function processIncludes(string $query, string $basePath): string
