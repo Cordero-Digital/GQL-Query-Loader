@@ -1,0 +1,5 @@
+fragment SimpleFragment on Object {
+    id
+    name
+    email
+}

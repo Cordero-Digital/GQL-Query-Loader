@@ -1,0 +1,12 @@
+query variableReplacement{{ schemaDescription }} {
+    user{{ id }} {
+        id
+        name
+        email
+    }
+    users{{ status }} {
+        id
+        name
+        email
+    }
+}

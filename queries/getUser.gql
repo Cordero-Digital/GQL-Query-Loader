@@ -1,7 +1,0 @@
-#include "fragments/userFragment.gql"
-
-query getUser($id: ID!) {
-    user(id: $id) {
-        ...UserFragment
-    }
-}
