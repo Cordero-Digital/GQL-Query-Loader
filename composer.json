@@ -16,10 +16,12 @@
             "email": "tomas@cordero.digital"
         }
     ],
-    "require": {},
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest"
     }
 }
