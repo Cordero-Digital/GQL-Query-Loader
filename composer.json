@@ -1,0 +1,25 @@
+{
+    "name": "corderodigital/gql-query-loader",
+    "description": "A PHP library that adds native .gql and .graphql file type support.",
+    "type": "library",
+    "require-dev": {
+        "pestphp/pest": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "CorderoDigital\\GqlQueryLoader\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tomas Cordero",
+            "email": "tomas@cordero.digital"
+        }
+    ],
+    "require": {},
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
