@@ -1,0 +1,7 @@
+#include "fragments/simpleFragment.graphql"
+
+query testSimpleSingleFragment {
+    object {
+        ...SimpleFragment
+    }
+}

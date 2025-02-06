@@ -1,0 +1,7 @@
+#include "fragments/missingFragment.gql"
+
+query testSimpleSingleFragment {
+    object {
+        ...SimpleFragment
+    }
+}

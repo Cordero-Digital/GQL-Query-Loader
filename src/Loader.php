@@ -23,7 +23,10 @@ class Loader
     {
         return preg_replace_callback('/#include\s+"([^"]+)"/', function ($matches) use ($basePath) {
             $fragmentPath = realpath($basePath . '/' . $matches[1]);
-            if (!$fragmentPath || isset(self::$loadedFragments[$fragmentPath])) {
+            if (!$fragmentPath) {
+                throw new \Exception("Fragment file not found: " . $matches[1]);
+            }
+            if (isset(self::$loadedFragments[$fragmentPath])) {
                 return ''; // Prevent duplicate loading
             }
 
@@ -34,23 +37,26 @@ class Loader
 
     protected static function replaceVariables(string $query, array $variables): string
     {
-        // $schemaArray = [];
-        // foreach ($variables as $key => $value) {
-            // $schemaArray[] = "\${$value['name']}: {$value['type']}";
-            // $escapedValue = self::escapeValue($value);
-            // $query = str_replace("{{ $key }}", $escapedValue, $query);
-        // }
         $schemaDescription = self::buildDescription($variables);
-        // $query = str_replace('{{ schemaDescription }}', $schemaDescription, $query);
-        $query = preg_replace_callback('/{{\s*(schemaDescription)\s*}}/', function ($matches) use ($schemaDescription) {
-            $key = trim($matches[1]); // Remove extra spaces
-            return $schemaDescription;
+        $query = preg_replace_callback('/{{\s*([\w,\s]+)\s*}}/', function ($matches) use ($variables, $schemaDescription) {
+            $key = trim($matches[1]);
+            if ($key === 'schemaDescription') {
+                return $schemaDescription;
+            }
+            $keys = array_map('trim', explode(',', $key));
+            $formattedVars = [];
+            $variablesHash = array_reduce($variables, function($carry, $item) {
+                $carry[$item['name']] = $item;
+                return $carry;
+            }, []);
+            foreach ($keys as $k => $key) {;
+                if (!isset($variablesHash[$key])) {
+                    throw new \Exception("Variable \$$key is set in query but not in variables array");
+                }
+                $formattedVars[] = "\${$variablesHash[$key]['name']}: " . self::escapeValue($variablesHash[$key]['value']);
+            }
+            return '(' . join(', ', $formattedVars) . ')';
         }, $query);
-        foreach ($variables as $variable) {
-            $escapedValue = self::escapeValue($variable['value']);
-            $value = "( \${$variable['name']}: $escapedValue )";
-            $query = str_replace("{{ {$variable['name']} }}", $value, $query);
-        }
         return $query;
     }
 
