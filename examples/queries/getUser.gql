@@ -1,0 +1,7 @@
+#include "fragments/userDetails.gql"
+
+query getUser{{ schemaDescription }} {
+    user{{ id }} {
+        ...UserDetails
+    }
+}
