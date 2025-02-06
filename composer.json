@@ -1,5 +1,5 @@
 {
-    "name": "corderodigital/gql-query-loader",
+    "name": "cordero-digital/gql-query-loader",
     "description": "A PHP library that adds native .gql and .graphql file type support.",
     "type": "library",
     "license": "MIT",
