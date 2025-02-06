@@ -1,6 +1,6 @@
 <?php
 
-namespace CorderoDigital\QueryLoader;
+namespace CorderoDigital\GQLQueryLoader;
 
 class Loader
 {

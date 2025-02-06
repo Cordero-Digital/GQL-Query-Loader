@@ -1,6 +1,6 @@
 <?php
 
-use CorderoDigital\QueryLoader\Loader;
+use CorderoDigital\GQLQueryLoader\Loader;
 
 beforeEach(function () {
     $this->root = __DIR__ . '/../';

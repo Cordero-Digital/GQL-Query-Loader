@@ -1,14 +1,17 @@
 {
-    "name": "corderodigital/query-loader",
+    "name": "corderodigital/gql-query-loader",
     "description": "A PHP library that adds native .gql and .graphql file type support.",
     "type": "library",
+    "require": {
+        "php": ">=8.1"
+    },
     "require-dev": {
         "pestphp/pest": "^3.7",
         "symfony/var-dumper": "^7.2"
     },
     "autoload": {
         "psr-4": {
-            "CorderoDigital\\QueryLoader\\": "src/"
+            "CorderoDigital\\GQLQueryLoader\\": "src/"
         }
     },
     "authors": [
