@@ -1,6 +1,6 @@
 #include "fragments/userDetails.gql"
 
-query getUser{{ schemaDescription }} {
+query getUser {
     user{{ id }} {
         ...UserDetails
     }

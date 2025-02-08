@@ -1,4 +1,4 @@
-query userQuery{{ schemaDescription }} {
+query userQuery {
     user{{ id, status }} {
         id
         name

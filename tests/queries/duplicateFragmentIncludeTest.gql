@@ -1,0 +1,8 @@
+#include "fragments/simpleFragment.gql"
+#include "fragments/simpleFragment.gql"
+
+query testSimpleSingleFragment {
+    object {
+        ...SimpleFragment
+    }
+}
