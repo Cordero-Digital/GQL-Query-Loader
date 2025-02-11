@@ -141,17 +141,33 @@ GQL;
 
 });
 
-test('it throws an exception if variable is set in query but not in variables array', function () {
-    $variables = [
-        'id' => 123,
-    ];
-
-    $query = (new Loader)->loadQuery($this->root . 'queries/variableNotInArrayExceptionTest.gql', $variables)->query();
-
-})->throws(Exception::class, 'Variable status is set in query but not in variables array');
-
 test('it throws an exception if fragment file is missing', function () {
 
     $query = (new Loader)->loadQuery($this->root . 'queries/missingFragmentExceptionTest.gql')->query();
 
 })->throws(Exception::class, 'Fragment file not found: fragments/missingFragment.gql');
+
+test('it ignores missing variables', function () {
+    $variables = [
+        'id' => 123,
+    ];
+
+    $query = (new Loader)->loadQuery($this->root . 'queries/variableInjectionTest.gql', $variables)->query();
+
+    $expected = <<<GQL
+query userQuery {
+    user(id: 123) {
+        id
+        name
+        email
+    }
+    users {
+        id
+        name
+        email
+    }
+}
+GQL;
+
+    expect($query)->toBe($expected);
+});

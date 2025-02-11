@@ -60,11 +60,14 @@ class Loader
             $key = trim($matches[1]);
             $keys = array_map('trim', explode(',', $key));
             $formattedVars = [];
-            foreach ($keys as $k => $key) {;
-                if (!isset($variables[$key])) {
-                    throw new \Exception("Variable $key is set in query but not in variables array");
+            foreach ($keys as $k => $key) {
+                if (!array_key_exists($key, $variables)) {
+                    continue;
                 }
                 $formattedVars[] = "$key: " . $this->escapeValue($variables[$key]);
+            }
+            if (empty($formattedVars)) {
+                return '';
             }
             return '(' . join(', ', $formattedVars) . ')';
         }, $query);
