@@ -3,7 +3,7 @@
     "description": "A PHP library that adds native .gql and .graphql file type support.",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "beta",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=8.1"
     },
